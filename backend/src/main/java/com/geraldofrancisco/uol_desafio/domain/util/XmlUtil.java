@@ -8,9 +8,9 @@ import lombok.SneakyThrows;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class XmlUtil {
 
-    @SneakyThrows
-    public static Object toObject(String xml, Class<?> clazz) {
-        var mapper = new XmlMapper();
-        return mapper.readValue(xml, clazz);
-    }
+  @SneakyThrows
+  public static Object toObject(String xml, Class<?> clazz) {
+    var mapper = new XmlMapper();
+    return mapper.readValue(xml, clazz);
+  }
 }
