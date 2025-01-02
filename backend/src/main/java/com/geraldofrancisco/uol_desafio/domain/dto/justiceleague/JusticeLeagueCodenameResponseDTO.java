@@ -18,5 +18,5 @@ import java.util.List;
 public class JusticeLeagueCodenameResponseDTO {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "codinome")
-    List<String> codeName;
+    List<String> codeNames;
 }

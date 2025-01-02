@@ -17,3 +17,6 @@ app:
   integration:
     justice-league: https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml
     avenger: https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/vingadores.json
+  cache-duration-minutes:
+    justice-league: 60
+    avenger: 20

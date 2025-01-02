@@ -18,5 +18,5 @@ import lombok.ToString;
 public class JusticeLeagueResponseDTO {
 
   @JacksonXmlProperty(localName = "codinomes")
-  private JusticeLeagueCodenameResponseDTO codiNames;
+  private JusticeLeagueCodenameResponseDTO codeNames;
 }
