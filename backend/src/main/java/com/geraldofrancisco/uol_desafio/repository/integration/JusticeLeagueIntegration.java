@@ -3,7 +3,7 @@ package com.geraldofrancisco.uol_desafio.repository.integration;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
-import com.geraldofrancisco.uol_desafio.domain.dto.JusticeLeagueResponseDTO;
+import com.geraldofrancisco.uol_desafio.domain.dto.justiceleague.JusticeLeagueResponseDTO;
 import com.geraldofrancisco.uol_desafio.domain.util.XmlUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
