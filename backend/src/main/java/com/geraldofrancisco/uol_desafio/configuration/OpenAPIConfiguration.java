@@ -20,8 +20,8 @@ public class OpenAPIConfiguration {
 
     private Info getAppInfo() {
         return new Info()
-                .title("Service Pluggy")
-                .description("API de comunicação com o serviço da Pluggy")
+                .title("Desafio UOL")
+                .description("API de de criação de usuários baseados no desafio de backend da UOL")
                 .version(appVersion);
     }
 }
