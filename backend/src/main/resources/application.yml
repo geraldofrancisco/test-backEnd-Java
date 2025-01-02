@@ -14,3 +14,5 @@ spring:
       path: /h2-console
 app:
   version: ^project.version^
+  integration:
+    justice-league: https://raw.githubusercontent.com/uolhost/test-backEnd-Java/master/referencias/liga_da_justica.xml
