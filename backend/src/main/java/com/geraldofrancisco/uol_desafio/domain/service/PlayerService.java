@@ -2,6 +2,7 @@ package com.geraldofrancisco.uol_desafio.domain.service;
 
 import com.geraldofrancisco.uol_desafio.domain.converter.PlayerConverter;
 import com.geraldofrancisco.uol_desafio.domain.dto.player.PlayerDTO;
+import com.geraldofrancisco.uol_desafio.exception.UOLException;
 import com.geraldofrancisco.uol_desafio.repository.PlayerRepository;
 import com.geraldofrancisco.uol_desafio.repository.integration.AvengerIntegration;
 import com.geraldofrancisco.uol_desafio.repository.integration.JusticeLeagueIntegration;
@@ -12,6 +13,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+
+import static com.geraldofrancisco.uol_desafio.domain.enums.ExceptionType.NO_VACANCY_FOR_THE_TYPE;
+import static com.geraldofrancisco.uol_desafio.domain.enums.ExceptionType.USER_ALREADY_REGISTERED_FOR_THE_TYPE;
 
 @Service
 @Slf4j
@@ -36,42 +40,34 @@ public class PlayerService {
   }
 
   private Mono<PlayerDTO> createPlayer(List<String> heroes, PlayerDTO dto) {
-    return repository
-        .findByType(dto.getType())
+    return repository.findByType(dto.getType())
         .collectList()
-        .flatMap(
-            previouslySaved ->
-                Mono.just(heroes)
-                    .filter(h -> h.size() > previouslySaved.size())
-                    .switchIfEmpty(
-                        Mono.error(
-                            new Exception(
-                                "Não existe espaço para esse tipo"))) // TODO: CRIAR EXCEÇÃO
-                    // PERSONALIZADA
-                    .flatMapMany(Flux::fromIterable)
-                    .filter(
-                        hero ->
-                            previouslySaved.stream()
-                                .noneMatch(
-                                    player -> player.getCodename().equals(dto.getCodename())))
-                    .switchIfEmpty(Mono.error(new Exception("usuário já cadastrado")))
-                    .filter(
-                        hero ->
-                            previouslySaved.stream()
-                                .noneMatch(player -> player.getCodename().equals(hero)))
-                    .next()
+        .flatMap(previouslySaved ->
+            Mono.just(heroes)
+                .filter(h -> h.size() > previouslySaved.size())
+                .switchIfEmpty(Mono.error(new UOLException(NO_VACANCY_FOR_THE_TYPE)))
+                .flatMapMany(Flux::fromIterable)
+                .filter(hero -> previouslySaved.stream()
+                  .noneMatch(player -> player.getName().equals(dto.getName())))
+                .filter(hero -> previouslySaved.stream()
+                    .noneMatch(player -> player.getEmail().equals(dto.getEmail())))
+                .switchIfEmpty(Mono.error(new UOLException(USER_ALREADY_REGISTERED_FOR_THE_TYPE)))
+                .filter(hero -> previouslySaved.stream()
+                  .noneMatch(player -> player.getCodename().equals(hero)))
+                .next()
         )
-        .map(hero -> {
+        .map(
+            hero -> {
               dto.setCodename(hero);
               return dto;
-        })
+            })
         .flatMap(this::save);
   }
 
   private Mono<PlayerDTO> save(PlayerDTO dto) {
     return Mono.just(dto)
-        .map(PlayerConverter::toDomain)
-        .flatMap(repository::save)
-        .map(PlayerConverter::toDTO);
+      .map(PlayerConverter::toDomain)
+      .flatMap(repository::save)
+      .map(PlayerConverter::toDTO);
   }
 }
