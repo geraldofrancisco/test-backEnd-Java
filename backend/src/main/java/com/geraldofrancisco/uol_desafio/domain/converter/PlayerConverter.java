@@ -14,6 +14,7 @@ public class PlayerConverter {
         .name(dto.getName())
         .codename(dto.getCodename())
         .type(dto.getType())
+        .phone(dto.getPhone())
         .build();
   }
 

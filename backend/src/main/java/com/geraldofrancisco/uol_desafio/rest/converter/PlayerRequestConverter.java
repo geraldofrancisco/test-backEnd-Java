@@ -8,12 +8,20 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PlayerRequestConverter {
-    public static PlayerDTO toDTO(PlayerCreateRequest request) {
+  public static PlayerDTO toDTO(PlayerCreateRequest request) {
     return PlayerDTO.builder()
         .name(request.getName())
         .email(request.getEmail())
-        .phone(request.getPhone())
+        .phone(clearMaskPhone(request.getPhone()))
         .type(PlayerType.getByName(request.getType()))
         .build();
-    }
+  }
+
+  private static String clearMaskPhone(String phone) {
+    return phone
+        .replace(" ", "")
+        .replace(")", "")
+        .replace("(", "")
+        .replace("-", "");
+  }
 }
