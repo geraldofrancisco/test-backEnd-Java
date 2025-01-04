@@ -12,6 +12,6 @@ public class Descriptions {
     //Player create request
     public static final String PLAYER_CREATE_REQUEST_NAME = "Nome do jogador";
     public static final String PLAYER_CREATE_REQUEST_EMAIL = "Email do jogador";
-    public static final String PLAYER_CREATE_REQUEST_PHONE = "Telefone do jogador";
+    public static final String PLAYER_CREATE_REQUEST_PHONE = "Telefone do jogador. <br /> Formatos válidos: (11) 98765-4321, 11 98765-4321, 1198765-4321, 11 8765-4321, 1187654321";
     public static final String PLAYER_CREATE_REQUEST_TYPE = "Tipo do herói";
 }
