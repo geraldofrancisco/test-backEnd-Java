@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
@@ -12,6 +13,7 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 public enum ExceptionType {
 
     GENERIC(INTERNAL_SERVER_ERROR, "500.001"),
+    BAD_REQUEST_ERROR(BAD_REQUEST, null),
     NO_VACANCY_FOR_THE_TYPE(UNPROCESSABLE_ENTITY, "422.001"),
     USER_ALREADY_REGISTERED_FOR_THE_TYPE(UNPROCESSABLE_ENTITY, "422.002");
 

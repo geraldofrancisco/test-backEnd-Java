@@ -27,12 +27,12 @@ import static com.geraldofrancisco.uol_desafio.domain.constants.Example.PHONE_EX
 @AllArgsConstructor
 public class PlayerCreateRequest {
   @Schema(description = PLAYER_CREATE_REQUEST_NAME_DESCRIPTION, example = NAME_EXAMPLE)
-  @NotBlank
+  @NotBlank(message = "PLAYER_CREATE_NAME_REQUIRED")
   private String name;
 
   @Schema(description = PLAYER_CREATE_REQUEST_EMAIL_DESCRIPTION, example = EMAIL_EXAMPLE)
-  @NotBlank
-  @Email
+  @NotBlank(message = "PLAYER_CREATE_EMAIL_REQUIRED")
+  @Email(message = "PLAYER_CREATE_EMAIL_INVALID")
   private String email;
 
   @Schema(description = PLAYER_CREATE_REQUEST_PHONE_DESCRIPTION, example = PHONE_EXAMPLE)
@@ -40,7 +40,7 @@ public class PlayerCreateRequest {
   private String phone;
 
   @Schema(description = PLAYER_CREATE_REQUEST_TYPE_DESCRIPTION, implementation = PlayerType.class)
-  @NotBlank
-  @ValueOfEnum(enumClass = PlayerType.class)
+  @NotBlank(message = "PLAYER_CREATE_TYPE_REQUIRED")
+  @ValueOfEnum(enumClass = PlayerType.class, message = "PLAYER_CREATE_TYPE_INVALID")
   private String type;
 }
