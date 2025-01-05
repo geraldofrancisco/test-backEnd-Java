@@ -27,7 +27,14 @@ public class UolExceptionHandler {
     public Mono<ResponseEntity<ExceptionResponse>> handlerException (final Exception ex) {
         return Mono.just(GENERIC)
                 .flatMap(type -> getExceptionResponse(type, ex.getMessage(), null))
-                .doFirst(() -> log.error("There was a generic error: ", ex));
+                .doFirst(() -> log.error("Aconteceu um erro genérico ", ex));
+    }
+
+    @ExceptionHandler(UOLException.class)
+    public Mono<ResponseEntity<ExceptionResponse>> handlerException (final UOLException ex) {
+        return Mono.just(ex.getException())
+                .flatMap(type -> getExceptionResponse(type, null, null))
+                .doFirst(() -> log.error("Aconteceu um erro esperado pelo sistema. Cod: {}", ex.getException().getCode()));
     }
 
     private Mono<ResponseEntity<ExceptionResponse>> getExceptionResponse
