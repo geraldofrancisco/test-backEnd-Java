@@ -12,10 +12,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_EMAIL;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_NAME;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_PHONE;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_TYPE;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_EMAIL_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_NAME_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_PHONE_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CREATE_REQUEST_TYPE_DESCRIPTION;
 import static com.geraldofrancisco.uol_desafio.domain.constants.Example.EMAIL_EXAMPLE;
 import static com.geraldofrancisco.uol_desafio.domain.constants.Example.NAME_EXAMPLE;
 import static com.geraldofrancisco.uol_desafio.domain.constants.Example.PHONE_EXAMPLE;
@@ -26,20 +26,20 @@ import static com.geraldofrancisco.uol_desafio.domain.constants.Example.PHONE_EX
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlayerCreateRequest {
-  @Schema(description = PLAYER_CREATE_REQUEST_NAME, example = NAME_EXAMPLE)
+  @Schema(description = PLAYER_CREATE_REQUEST_NAME_DESCRIPTION, example = NAME_EXAMPLE)
   @NotBlank
   private String name;
 
-  @Schema(description = PLAYER_CREATE_REQUEST_EMAIL, example = EMAIL_EXAMPLE)
+  @Schema(description = PLAYER_CREATE_REQUEST_EMAIL_DESCRIPTION, example = EMAIL_EXAMPLE)
   @NotBlank
   @Email
   private String email;
 
-  @Schema(description = PLAYER_CREATE_REQUEST_PHONE, example = PHONE_EXAMPLE)
+  @Schema(description = PLAYER_CREATE_REQUEST_PHONE_DESCRIPTION, example = PHONE_EXAMPLE)
   @PhoneValidate
   private String phone;
 
-  @Schema(description = PLAYER_CREATE_REQUEST_TYPE, implementation = PlayerType.class)
+  @Schema(description = PLAYER_CREATE_REQUEST_TYPE_DESCRIPTION, implementation = PlayerType.class)
   @NotBlank
   @ValueOfEnum(enumClass = PlayerType.class)
   private String type;
