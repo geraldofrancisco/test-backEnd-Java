@@ -1,8 +1,19 @@
 package com.geraldofrancisco.uol_desafio.rest;
 
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_CREATE_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_CREATE_SUMMARY_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_PAGE_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_SIZE_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_SUMMARY_DESCRIPTION;
+import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_NAME_DESCRIPTION;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import com.geraldofrancisco.uol_desafio.domain.service.PlayerService;
 import com.geraldofrancisco.uol_desafio.exception.ExceptionResponse;
 import com.geraldofrancisco.uol_desafio.rest.converter.PlayerRequestConverter;
+import com.geraldofrancisco.uol_desafio.rest.converter.PlayerResponseConverter;
 import com.geraldofrancisco.uol_desafio.rest.model.PlayerCreateRequest;
 import com.geraldofrancisco.uol_desafio.rest.model.PlayerResponsePage;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +24,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,16 +35,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_CREATE_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_CREATE_SUMMARY_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_PAGE_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_SIZE_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_GET_SUMMARY_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_NAME_DESCRIPTION;
-import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.PLAYER_CONTROLLER_DESCRIPTION;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Validated
 @RestController
@@ -89,6 +91,8 @@ public class PlayerController {
           @RequestParam(required = false, defaultValue = "5")
           final Integer size
           ) {
-    return Mono.empty();
+    return Mono.just(PageRequest.of(page, size))
+        .flatMap(service::getPlayers)
+        .map(PlayerResponseConverter::toPageResponse);
   }
 }

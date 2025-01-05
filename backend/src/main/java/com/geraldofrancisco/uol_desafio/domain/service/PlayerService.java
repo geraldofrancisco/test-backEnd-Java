@@ -6,8 +6,11 @@ import com.geraldofrancisco.uol_desafio.exception.UOLException;
 import com.geraldofrancisco.uol_desafio.repository.PlayerRepository;
 import com.geraldofrancisco.uol_desafio.repository.integration.AvengerIntegration;
 import com.geraldofrancisco.uol_desafio.repository.integration.JusticeLeagueIntegration;
+import com.geraldofrancisco.uol_desafio.rest.model.PlayerResponsePage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -69,5 +72,9 @@ public class PlayerService {
       .map(PlayerConverter::toDomain)
       .flatMap(repository::save)
       .map(PlayerConverter::toDTO);
+  }
+
+  public Mono<PageImpl<PlayerDTO>> getPlayers(PageRequest page) {
+    return Mono.empty();
   }
 }

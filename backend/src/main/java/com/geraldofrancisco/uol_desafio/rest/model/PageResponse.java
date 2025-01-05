@@ -23,6 +23,12 @@ public abstract class PageResponse<T> {
   @Schema(description = PAGE_RESPONSE_SIZE_DESCRIPTION)
   private Integer size;
 
+  private Integer totalPages;
+
+  private boolean hasNext;
+
+  private boolean isLast;
+
   @Schema(description = PAGE_RESPONSE_ITEMS_DESCRIPTION)
   private List<T> items;
 }
