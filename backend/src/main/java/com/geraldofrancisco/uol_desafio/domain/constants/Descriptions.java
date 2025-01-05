@@ -9,6 +9,9 @@ public class Descriptions {
     public static final String PAGE_RESPONSE_PAGE_DESCRIPTION = "Número da página";
     public static final String PAGE_RESPONSE_SIZE_DESCRIPTION = "Tamanho da página";
     public static final String PAGE_RESPONSE_ITEMS_DESCRIPTION = "Lista com os ítens buscados";
+    public static final String PAGE_RESPONSE_TOTAL_PAGES_DESCRIPTION = "Quantidade total de páginas";
+    public static final String PAGE_RESPONSE_HAS_NEXT_DESCRIPTION = "Verifica se existe próxima página";
+    public static final String PAGE_RESPONSE_IS_LAST_DESCRIPTION = "Verifica se é a última página";
 
     //Player Controller
     public static final String PLAYER_CONTROLLER_NAME_DESCRIPTION = "Controlador de jogadores";
