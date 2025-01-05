@@ -1,5 +1,6 @@
 package com.geraldofrancisco.uol_desafio.exception;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.ERR
 import static com.geraldofrancisco.uol_desafio.domain.constants.Descriptions.ERROR_TIMESTAMP_DESCRIPTION;
 import static com.geraldofrancisco.uol_desafio.domain.constants.Example.ERROR_CODE_EXAMPLE;
 import static com.geraldofrancisco.uol_desafio.domain.constants.Example.TIMESTAMP_EXAMPLE;
+import static com.geraldofrancisco.uol_desafio.domain.constants.UOLConstants.DATE_ISO_FORMAT;
 
 @JsonInclude(NON_NULL)
 @Data
@@ -26,6 +28,7 @@ import static com.geraldofrancisco.uol_desafio.domain.constants.Example.TIMESTAM
 public class ExceptionResponse {
   @Schema(description = ERROR_TIMESTAMP_DESCRIPTION, example = TIMESTAMP_EXAMPLE)
   @Builder.Default
+  @JsonFormat(pattern = DATE_ISO_FORMAT)
   private LocalDateTime timestamp = LocalDateTime.now();
 
   @Schema(description = ERROR_MESSAGE_DESCRIPTION)
