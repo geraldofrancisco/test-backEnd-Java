@@ -10,5 +10,8 @@ public class Example {
     public static final String PHONE_EXAMPLE = "(99)99999-9999";
     public static final String TIMESTAMP_EXAMPLE = "2025-01-05T16:37:57.544Z";
     public static final String ERROR_CODE_EXAMPLE = "422.001";
+    public static final String TYPE_RESPONSE_EXAMPLE = "Liga da Justiça";
+    public static final String CODENAME_EXAMPLE = "Hulk";
+    public static final String ID_EXAMPLE = "123";
 
 }
