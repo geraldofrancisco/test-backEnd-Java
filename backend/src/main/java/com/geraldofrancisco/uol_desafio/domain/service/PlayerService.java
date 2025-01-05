@@ -75,7 +75,7 @@ public class PlayerService {
 
   public Mono<PageImpl<PlayerDTO>> getPlayers(PageRequest pageable) {
     return repository.count()
-      .flatMap(total -> repository.findByOrderByTypeAsc(pageable)
+      .flatMap(total -> repository.findByOrderByTypeAscNameAsc(pageable)
         .map(PlayerConverter::toDTO)
         .collectList()
         .map(list -> new PageImpl<>(list, pageable, total))

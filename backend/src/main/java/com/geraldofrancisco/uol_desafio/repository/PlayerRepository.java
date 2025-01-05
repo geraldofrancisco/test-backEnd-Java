@@ -10,5 +10,5 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface PlayerRepository extends R2dbcRepository<Player, Long> {
     Flux<Player> findByType(PlayerType type);
-    Flux<Player> findByOrderByTypeAsc(Pageable pageable);
+    Flux<Player> findByOrderByTypeAscNameAsc(Pageable pageable);
 }
